@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovanni's — Meniu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --pearl:#FBF8F1;
+            --cream:#F4EEE1;
+            --cream-deep:#EAE1CC;
+            --ink:#3B342A;
+            --ink-soft:#786E5E;
+            --rose:#C1806E;
+            --terracotta:#B36A4E;
+            --olive:#8F9A70;
+            --gold:#B08A4E;
+            --gold-soft:#D9C9A0;
+            --mocha:#6B5645;
+            --line: rgba(107,86,69,0.18);
+        }
+        *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+        html{scroll-behavior:smooth;}
+        body{
+            margin:0;
+            background:
+                    radial-gradient(1200px 600px at 50% -10%, #FFFDF8 0%, var(--pearl) 55%, var(--cream) 100%);
+            color:var(--ink);
+            font-family:'Jost', sans-serif;
+            font-weight:300;
+            line-height:1.5;
+            -webkit-font-smoothing:antialiased;
+        }
+        .shell{max-width:760px; margin:0 auto; padding:0 0 80px;}
+
+        .backlink{
+            position:sticky; top:0; z-index:30;
+            display:flex; align-items:center; gap:8px;
+            padding:14px 22px;
+            background:rgba(251,248,241,0.94);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid var(--line);
+            font-family:'Jost',sans-serif;
+            font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+            color:var(--mocha);
+            text-decoration:none;
+        }
+        .backlink svg{ flex:0 0 auto; }
+
+        /* HERO */
+        .hero{
+            position:relative;
+            padding:56px 24px 34px;
+            text-align:center;
+            overflow:hidden;
+        }
+        .hero::before{
+            content:"";
+            position:absolute; inset:0;
+            background:
+                    linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 60%);
+            pointer-events:none;
+        }
+        .crest{
+            width:64px; height:64px; margin:0 auto 18px;
+            opacity:.85;
+        }
+        .brand{
+            font-family:'Cormorant Garamond', serif;
+            font-weight:600;
+            letter-spacing:0.14em;
+            text-transform:uppercase;
+            font-size:clamp(34px,9vw,52px);
+            color:var(--mocha);
+            margin:0;
+        }
+        .brand em{font-style:italic; font-weight:500; color:var(--terracotta); letter-spacing:0.02em;}
+        .tagline{
+            font-family:'Cormorant Garamond', serif;
+            font-style:italic;
+            font-size:18px;
+            color:var(--ink-soft);
+            margin:8px 0 0;
+            letter-spacing:.02em;
+        }
+        .rule{
+            width:120px; height:1px; margin:22px auto;
+            background:linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        /* NAV */
+        .navwrap{
+            position:sticky; top:41px; z-index:20;
+            background:rgba(251,248,241,0.92);
+            backdrop-filter: blur(8px);
+            border-bottom:1px solid var(--line);
+        }
+        nav{
+            display:flex; gap:6px; overflow-x:auto;
+            padding:12px 16px;
+            scrollbar-width:none;
+        }
+        nav::-webkit-scrollbar{display:none;}
+        nav a{
+            flex:0 0 auto;
+            font-family:'Jost',sans-serif;
+            font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+            color:var(--mocha);
+            text-decoration:none;
+            padding:8px 14px;
+            border:1px solid var(--line);
+            border-radius:20px;
+            white-space:nowrap;
+            transition:all .25s ease;
+            background:var(--pearl);
+        }
+        nav a:hover, nav a.active{
+            background:var(--mocha); color:var(--pearl); border-color:var(--mocha);
+        }
+
+        /* CATEGORY */
+        .category{
+            padding:46px 22px 8px;
+            scroll-margin-top:104px;
+        }
+        .cat-head{
+            display:flex; align-items:center; gap:14px;
+            margin-bottom:6px;
+        }
+        .cat-num{
+            font-family:'Cormorant Garamond',serif;
+            font-size:14px; color:var(--gold);
+            letter-spacing:.1em;
+        }
+        .cat-title{
+            font-family:'Cormorant Garamond', serif;
+            font-weight:600;
+            font-size:clamp(26px,6vw,32px);
+            color:var(--mocha);
+            margin:0;
+            letter-spacing:.02em;
+        }
+        .cat-sub{
+            font-size:13.5px; color:var(--ink-soft); margin:2px 0 22px;
+            font-style:italic; font-family:'Cormorant Garamond',serif;
+        }
+        .divider{
+            display:flex; align-items:center; gap:10px;
+            margin:8px 0 26px; color:var(--gold-soft);
+        }
+        .divider svg{flex:0 0 auto;}
+        .divider .l{flex:1; height:1px; background:linear-gradient(90deg, var(--gold-soft), transparent);}
+        .divider .r{flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--gold-soft));}
+
+        /* DISH CARD */
+        .dish{
+            padding:18px 0;
+            border-bottom:1px solid var(--line);
+        }
+        .dish:last-child{border-bottom:none;}
+        .dish-top{
+            display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+        }
+        .dish-name{
+            font-family:'Cormorant Garamond', serif;
+            font-weight:600;
+            font-size:19px;
+            color:var(--ink);
+        }
+        .dish-price{
+            flex:0 0 auto;
+            font-family:'Jost',sans-serif;
+            font-size:15px; font-weight:500;
+            color:var(--terracotta);
+            white-space:nowrap;
+            position:relative; padding-left:10px;
+        }
+        .dots{
+            flex:1; border-bottom:1.5px dotted var(--gold-soft);
+            margin:0 8px; transform:translateY(-4px);
+            min-width:16px;
+        }
+        .dish-desc{
+            font-size:13.8px; color:var(--ink-soft); margin-top:5px; line-height:1.55;
+        }
+        .dish-meta{
+            display:flex; flex-wrap:wrap; gap:10px;
+            font-size:11px; color:var(--olive);
+            margin-top:7px; letter-spacing:.03em; text-transform:uppercase;
+        }
+        .dish-meta span{
+            background:rgba(143,154,112,0.12);
+            padding:3px 9px; border-radius:10px;
+        }
+        .dish-meta .alg{color:var(--rose); background:rgba(193,128,110,0.12);}
+
+        .note{
+            font-family:'Cormorant Garamond',serif; font-style:italic;
+            font-size:15px; color:var(--ink-soft);
+            background:var(--cream-deep);
+            border-left:2px solid var(--gold);
+            padding:12px 16px; border-radius:4px;
+            margin:18px 0 4px;
+        }
+
+        /* ALLERGENS */
+        .allergen-box{
+            margin:60px 22px 0;
+            padding:28px 24px;
+            background:var(--pearl);
+            border:1px solid var(--line);
+            border-radius:14px;
+        }
+        .allergen-box h3{
+            font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--mocha);
+            margin:0 0 12px; letter-spacing:.03em;
+        }
+        .allergen-box ul{
+            margin:10px 0; padding-left:18px; font-size:13.5px; color:var(--ink-soft);
+            columns:2; column-gap:24px;
+        }
+        .allergen-box li{margin-bottom:6px; break-inside:avoid;}
+        details summary{
+            cursor:pointer; font-size:13px; color:var(--gold); letter-spacing:.05em;
+            text-transform:uppercase; margin-top:6px; list-style:none;
+        }
+        details summary::-webkit-details-marker{display:none;}
+        details summary::after{content:"›"; margin-left:6px;}
+        details[open] summary::after{content:"‹";}
+
+        footer{
+            text-align:center; margin-top:50px; padding:0 24px;
+            color:var(--ink-soft); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+        }
+        footer .fmark{
+            font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px;
+            text-transform:none; letter-spacing:0; color:var(--gold); display:block; margin-bottom:6px;
+        }
+
+        @media (max-width:520px){
+            .allergen-box ul{ columns:1; }
+        }
+    </style>
+</head>
+<body>
+
+<a class="backlink" href="index.html">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M5 1L1 5L5 9" stroke="#6B5645" stroke-width="1.2"/><path d="M1 5H13" stroke="#6B5645" stroke-width="1.2"/></svg>
+    Înapoi la Giovanni's
+</a>
+
+<div class="shell">
+
+    <!-- HERO -->
+    <div class="hero">
+        <svg class="crest" viewBox="0 0 64 64" fill="none">
+            <path d="M32 6 C20 14, 12 26, 12 38 C12 50, 21 58, 32 58 C43 58, 52 50, 52 38 C52 26, 44 14, 32 6 Z" stroke="#B08A4E" stroke-width="1"/>
+            <path d="M32 14 C24 22, 20 30, 20 38 C20 45, 25 50, 32 50" stroke="#8F9A70" stroke-width="1"/>
+            <circle cx="32" cy="32" r="2.4" fill="#B08A4E"/>
+        </svg>
+        <h1 class="brand">Giovanni'<em>s</em></h1>
+        <p class="tagline">ristorante &amp; bar · bucătărie italiană autentică</p>
+        <div class="rule"></div>
+    </div>
+
+    <!-- NAV -->
+    <div class="navwrap">
+        <nav id="catnav">
+            <a href="#aperitive">Aperitive</a>
+            <a href="#fel-principal">Supe &amp; Risotto</a>
+            <a href="#peste">Pește &amp; Fructe de mare</a>
+            <a href="#carne">Carne</a>
+            <a href="#paste">Paste</a>
+            <a href="#pizza">Pizza</a>
+            <a href="#garnituri">Garnituri</a>
+            <a href="#salate">Salate</a>
+            <a href="#desert">Desert</a>
+            <a href="#alergeni">Alergeni</a>
+        </nav>
+    </div>
+
+    <!-- APERITIVE -->
+    <section class="category" id="aperitive">
+        <div class="cat-head"><span class="cat-num">I.</span><h2 class="cat-title">Aperitive</h2></div>
+        <p class="cat-sub">pentru a începe masa, în stil mediteranean</p>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Carpaccio de somon marinat în citrice</span><span class="dots"></span><span class="dish-price">48 lei</span></div>
+            <div class="dish-desc">Somon proaspăt marinat, servit cu fenicul și portocală, ulei de măsline extravirgin.</div>
+            <div class="dish-meta"><span>150 g · 335 kcal</span><span class="alg">Pește</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tris de scoici Saint Jacque</span><span class="dots"></span><span class="dish-price"></span></div>
+            <div class="dish-desc">Selecție fină de scoici Saint-Jacques, preparate în stil de casă.</div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Midii în stil mediteranean</span><span class="dots"></span><span class="dish-price">52 lei</span></div>
+            <div class="dish-desc">Midii în coajă, roșii cherry, usturoi, vin alb, ulei de măsline extravirgin, pătrunjel.</div>
+            <div class="dish-meta"><span>317 g · 295 kcal</span><span class="alg">Moluște</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Trio de scoici Saint-Jacques gratinate</span><span class="dots"></span><span class="dish-price">62 lei</span></div>
+            <div class="dish-desc">Cu fistic, migdale și alune de pădure, unt și usturoi.</div>
+            <div class="dish-meta"><span>184 g · 420 kcal</span><span class="alg">Moluște, gluten, fructe cu coajă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Platou de mezeluri &amp; brânzeturi italiene — mic</span><span class="dots"></span><span class="dish-price">78 lei</span></div>
+            <div class="dish-desc">Prosciutto crudo, ventricina, speck și specialități italiene, brânzeturi maturate și semi-maturate, dulceață de citrice, mix de fructe proaspete, grissine.</div>
+            <div class="dish-meta"><span>300 g · 1420 kcal</span><span class="alg">Lapte, gluten</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Platou de mezeluri &amp; brânzeturi italiene — mare</span><span class="dots"></span><span class="dish-price">130 lei</span></div>
+            <div class="dish-desc">Aceeași selecție rafinată, în porție generoasă pentru a fi împărtășită.</div>
+            <div class="dish-meta"><span>700 g · 2180 kcal</span><span class="alg">Lapte, gluten</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Bruschete la alegere</span><span class="dots"></span><span class="dish-price">25–42 lei</span></div>
+            <div class="dish-desc">Pâine prăjită, topping la alegere: roșii și busuioc · somon și guacamole · mozzarella și prosciutto crudo.</div>
+            <div class="dish-meta"><span>4 bucăți / porție</span><span class="alg">Gluten, pește, lapte</span></div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- FEL PRINCIPAL (supe/risotto) -->
+    <section class="category" id="fel-principal">
+        <div class="cat-head"><span class="cat-num">II.</span><h2 class="cat-title">Supe &amp; Risotto</h2></div>
+        <p class="cat-sub">preparate calde, din bucătăria mediteraneană</p>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Supă mediteraneană de fructe de mare</span><span class="dots"></span><span class="dish-price">55 lei</span></div>
+            <div class="dish-desc">Fond de pește, midii, creveți, calamari, scoici/vongole, roșii decojite, vin alb, busuioc, crostini.</div>
+            <div class="dish-meta"><span>250 g · 300 kcal</span><span class="alg">Gluten, crustacee, moluște, pește</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Risotto cu fructe de mare</span><span class="dots"></span><span class="dish-price">67 lei</span></div>
+            <div class="dish-desc">Orez Carnaroli, midii, creveți, calamari, scoici/vongole, fond de pește, vin alb, parmezan.</div>
+            <div class="dish-meta"><span>250 g</span><span class="alg">Crustacee, moluște, pește</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Risotto cu creveți</span><span class="dots"></span><span class="dish-price"></span></div>
+            <div class="dish-desc">Orez Carnaroli preparat cremos, cu creveți proaspeți.</div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Risotto cu ciuperci &amp; crocant de speck</span><span class="dots"></span><span class="dish-price">54 lei</span></div>
+            <div class="dish-desc">Orez Carnaroli, ciuperci hribi, crocant de speck, fond de legume, parmezan, unt.</div>
+            <div class="dish-meta"><span>250 g · 690 kcal</span></div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- PESTE & FRUCTE DE MARE -->
+    <section class="category" id="peste">
+        <div class="cat-head"><span class="cat-num">III.</span><h2 class="cat-title">Fel principal — Pește &amp; Fructe de mare</h2></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Fritto Misto cu legume crocante &amp; sos tartar</span><span class="dots"></span><span class="dish-price">95 lei</span></div>
+            <div class="dish-desc">Calamari, creveți, file de sardină, zucchini, vinete, morcov, în crustă ușoară, prăjite crocant.</div>
+            <div class="dish-meta"><span>250 g · 550 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Spiedini de creveți cu caracatiță</span><span class="dots"></span><span class="dish-price">112 lei</span></div>
+            <div class="dish-desc">Alături de mix de salată estivală, ulei de măsline extravirgin, usturoi, lămâie.</div>
+            <div class="dish-meta"><span>250 g · 445 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Caracatiță la grătar cu cartofi copți</span><span class="dots"></span><span class="dish-price">118 lei</span></div>
+            <div class="dish-desc">Caracatiță fragedă, cartofi copți, ulei de măsline extravirgin, usturoi.</div>
+            <div class="dish-meta"><span>398 g · 520 kcal</span><span class="alg">Moluște, fructe cu coajă lemnoasă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Biban de mare la grătar</span><span class="dots"></span><span class="dish-price">75 lei</span></div>
+            <div class="dish-desc">Biban de mare întreg, suc de lămâie, ulei de măsline extravirgin.</div>
+            <div class="dish-meta"><span>380–480 g · 390–450 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Biban de mare alla Mediterranea</span><span class="dots"></span><span class="dish-price">108 lei</span></div>
+            <div class="dish-desc">Cu măsline, capere, roșii cherry, cartofi copți, vin alb.</div>
+            <div class="dish-meta"><span>550–615 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Sote de creveți</span><span class="dots"></span><span class="dish-price">98 lei / porție</span></div>
+            <div class="dish-desc">Cu midii, calamari, scoici/vongole, ulei de măsline extravirgin, usturoi, lămâie. (minim 2 pers.)</div>
+            <div class="dish-meta"><span>350 g / porție · 460 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Sote de creveți în sos alb sau roșu</span><span class="dots"></span><span class="dish-price">84 lei</span></div>
+            <div class="dish-desc">La alegere: sos alb din vin alb, unt și reducție de usturoi, sau sos roșu din roșii decojite și busuioc.</div>
+            <div class="dish-meta"><span>200 g · 390 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Platou de fructe de mare Adriatico — 4-6 pers.</span><span class="dots"></span><span class="dish-price">490 lei</span></div>
+            <div class="dish-desc">Midii, vongole, creveți la grătar, scoici Saint-Jacques gratinate, calamari la grătar, homar, sardine prăjite, crostini.</div>
+            <div class="dish-meta"><span>750 g · 490 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Platou de fructe de mare Adriatico — 6-8 pers.</span><span class="dots"></span><span class="dish-price">790 lei</span></div>
+            <div class="dish-desc">Variantă generoasă a platoului Adriatico, ideală pentru grup.</div>
+            <div class="dish-meta"><span>1500 g</span></div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- CARNE -->
+    <section class="category" id="carne">
+        <div class="cat-head"><span class="cat-num">IV.</span><h2 class="cat-title">Fel principal — Carne</h2></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tagliata de vită (antricot) cu salată, parmezan &amp; roșii cherry</span><span class="dots"></span><span class="dish-price">145 lei</span></div>
+            <div class="dish-desc">Antricot de vită, mix de salată, parmezan, ulei de măsline extravirgin, sare cristalizată, piper negru.</div>
+            <div class="dish-meta"><span>250 g · 400 kcal</span><span class="alg">Lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Hamburger artizanal de vită</span><span class="dots"></span><span class="dish-price">67 lei</span></div>
+            <div class="dish-desc">Cu cartofi prăjiți și sos tartar. Chiflă artizanală, burger de vită, cheddar, salată verde, roșii, ceapă caramelizată, bacon.</div>
+            <div class="dish-meta"><span>400 g</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Hamburger de pui crispy</span><span class="dots"></span><span class="dish-price">59 lei</span></div>
+            <div class="dish-desc">Cu cartofi prăjiți și sos tartar. Piept de pui crispy, cheddar, salată verde, roșii, ceapă caramelizată.</div>
+            <div class="dish-meta"><span>300 g · 550 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Cotlet de porc cu os în crustă aurie</span><span class="dots"></span><span class="dish-price">55 lei</span></div>
+            <div class="dish-desc">Pesmet, mix de condimente, ulei pentru prăjire.</div>
+            <div class="dish-meta"><span>370 g</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Coaste de porc rumenite la grătar</span><span class="dots"></span><span class="dish-price">55 lei</span></div>
+            <div class="dish-desc">Ulei de măsline, usturoi, condimente aromatice. (aprox. 5 buc.)</div>
+            <div class="dish-meta"><span>376 g</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Costată de vită maturată Chianina la grătar</span><span class="dots"></span><span class="dish-price">55 lei / 100 g</span></div>
+            <div class="dish-desc">Greutate medie 600-700 g. Servită cu cartofi copți cu rozmarin și sos tartar.</div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">T-Bone de vită maturată la grătar</span><span class="dots"></span><span class="dish-price">55 lei / 100 g</span></div>
+            <div class="dish-desc">Greutate medie 500-600 g. Servit cu cartofi copți cu rozmarin și sos tartar.</div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- PASTE -->
+    <section class="category" id="paste">
+        <div class="cat-head"><span class="cat-num">V.</span><h2 class="cat-title">Paste</h2></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Lasagna Bolognese</span><span class="dots"></span><span class="dish-price">59 lei</span></div>
+            <div class="dish-desc">Foi de lasagna, ragù alla Bolognese din carne de vită și porc, sos roșii, sos bechamel, Parmigiano Reggiano.</div>
+            <div class="dish-meta"><span>250 g · 820 kcal</span><span class="alg">Gluten, lapte, ouă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Spaghetti Carbonara</span><span class="dots"></span><span class="dish-price">56 lei</span></div>
+            <div class="dish-desc">Guanciale, gălbenuș de ou, Pecorino Romano, piper negru proaspăt măcinat.</div>
+            <div class="dish-meta"><span>200 g · 775 kcal</span><span class="alg">Gluten, ouă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Pasta Ragù (Bolognese)</span><span class="dots"></span><span class="dish-price">58 lei</span></div>
+            <div class="dish-desc">Ragù alla Bolognese din carne de vită și porc, sos de roșii, Parmigiano Reggiano, ulei de măsline extravirgin.</div>
+            <div class="dish-meta"><span>200 g</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Spaghete A.O.P. — Aglio, Oglio, Peperoncino</span><span class="dots"></span><span class="dish-price">39 lei</span></div>
+            <div class="dish-desc">Ulei de măsline extravirgin, usturoi, ardei iute, pătrunjel proaspăt, roșii cherry.</div>
+            <div class="dish-meta"><span>250 g · 400 kcal</span><span class="alg">Gluten</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Pasta al Pesto</span><span class="dots"></span><span class="dish-price">52 lei</span></div>
+            <div class="dish-desc">Sos pesto, busuioc proaspăt, muguri de pin, usturoi, Parmigiano Reggiano.</div>
+            <div class="dish-meta"><span>306 g · 710 kcal</span><span class="alg">Gluten, lapte, fructe cu coajă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tagliatelle cu creveți &amp; zucchini</span><span class="dots"></span><span class="dish-price">64 lei</span></div>
+            <div class="dish-desc">Creveți, zucchini, usturoi, vin alb, Parmigiano Reggiano, pătrunjel.</div>
+            <div class="dish-meta"><span>443 g · 560 kcal</span><span class="alg">Gluten, ouă, crustacee, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Spaghete cu fructe de mare</span><span class="dots"></span><span class="dish-price">75 lei</span></div>
+            <div class="dish-desc">Midii, creveți, calamari, scoici/vongole, roșii cherry, vin alb.</div>
+            <div class="dish-meta"><span>250 g · 400 kcal</span><span class="alg">Gluten, crustacee, moluște, sulfiți</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Spaghete cu Vongole</span><span class="dots"></span><span class="dish-price">69 lei</span></div>
+            <div class="dish-desc">Scoici vongole, usturoi, vin alb, pătrunjel, suc de lămâie.</div>
+            <div class="dish-meta"><span>270 g · 545 kcal</span><span class="alg">Gluten, moluște</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Paste cu crab &amp; roșii cherry</span><span class="dots"></span><span class="dish-price">110 lei</span></div>
+            <div class="dish-desc">Carne de crab, roșii cherry, usturoi, busuioc proaspăt, cognac.</div>
+            <div class="dish-meta"><span>250 g · 590 kcal</span><span class="alg">Gluten, crustacee</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Paste cu homar</span><span class="dots"></span><span class="dish-price">120 lei</span></div>
+            <div class="dish-desc">Bisque de homar, ulei de măsline extravirgin, busuioc proaspăt.</div>
+            <div class="dish-meta"><span>300 g · 400 kcal</span><span class="alg">Gluten, crustacee</span></div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- PIZZA -->
+    <section class="category" id="pizza">
+        <div class="cat-head"><span class="cat-num">VI.</span><h2 class="cat-title">Pizza</h2></div>
+        <p class="cat-sub">metodă tradițională italiană · făină premium Caputo · fermentație lentă</p>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Focaccia</span><span class="dots"></span><span class="dish-price">24 lei</span></div>
+            <div class="dish-desc">Aluat cu fermentație lentă, ulei de măsline extravirgin, oregano, rozmarin proaspăt, sare Maldon. Ø 32 cm.</div>
+            <div class="dish-meta"><span>240 g · 620 kcal</span><span class="alg">Gluten</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Margherita</span><span class="dots"></span><span class="dish-price">36 lei</span></div>
+            <div class="dish-desc">Sos de roșii San Marzano, mozzarella fior di latte, busuioc proaspăt, ulei de măsline extravirgin.</div>
+            <div class="dish-meta"><span>486 g · 890 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Prosciutto</span><span class="dots"></span><span class="dish-price">42 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella fior di latte, prosciutto cotto, ulei de măsline.</div>
+            <div class="dish-meta"><span>570 g · 1020 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Prosciutto e Mais</span><span class="dots"></span><span class="dish-price">44 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, prosciutto cotto, porumb dulce.</div>
+            <div class="dish-meta"><span>630 g · 1080 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Vegetariana</span><span class="dots"></span><span class="dish-price">42 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, zucchini, vinete, ciuperci, ardei gras, măsline.</div>
+            <div class="dish-meta"><span>670 g · 960 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Diavola</span><span class="dots"></span><span class="dish-price">43 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, salam picant.</div>
+            <div class="dish-meta"><span>574 g · 1130 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salami</span><span class="dots"></span><span class="dish-price">43 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, salam italian.</div>
+            <div class="dish-meta"><span>580 g · 1120 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Prosciutto e Funghi</span><span class="dots"></span><span class="dish-price">45 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, prosciutto cotto, ciuperci champignon.</div>
+            <div class="dish-meta"><span>640 g · 1040 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tonno e Cipolla</span><span class="dots"></span><span class="dish-price">47 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, ton, ceapă roșie, măsline.</div>
+            <div class="dish-meta"><span>650 g · 1010 kcal</span><span class="alg">Gluten, lapte, pește</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Quattro Formaggi</span><span class="dots"></span><span class="dish-price">49 lei</span></div>
+            <div class="dish-desc">Mozzarella fior di latte, gorgonzola, parmigiano, brie — fără sos de roșii.</div>
+            <div class="dish-meta"><span>535 g · 1180 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Mare Monti</span><span class="dots"></span><span class="dish-price">53 lei</span></div>
+            <div class="dish-desc">Sos de roșii, mozzarella, ciuperci, creveți.</div>
+            <div class="dish-meta"><span>700 g · 1060 kcal</span><span class="alg">Gluten, lapte, crustacee, moluște</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">San Daniele</span><span class="dots"></span><span class="dish-price">58 lei</span></div>
+            <div class="dish-desc">Mozzarella, prosciutto San Daniele, rucola, roșii cherry, fulgi de parmezan.</div>
+            <div class="dish-meta"><span>595 g · 1050 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Brie e Speck</span><span class="dots"></span><span class="dish-price">59 lei</span></div>
+            <div class="dish-desc">Mozzarella, brie, speck, rucola.</div>
+            <div class="dish-meta"><span>575 g · 1170 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Mortadella, Bufala e Pistachio</span><span class="dots"></span><span class="dish-price">61 lei</span></div>
+            <div class="dish-desc">Mozzarella, mortadella, mozzarella di bufala, pesto de fistic, granella de fistic — fără sos de roșii.</div>
+            <div class="dish-meta"><span>630 g · 1320 kcal</span><span class="alg">Gluten, lapte, fructe cu coajă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tartufo e Burrata</span><span class="dots"></span><span class="dish-price">63 lei</span></div>
+            <div class="dish-desc">Mozzarella, ulei de trufe, ciuperci, burrata, fulgi de parmezan.</div>
+            <div class="dish-meta"><span>647 g · 1220 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="note">Sosuri extra disponibile la cerere: sos alb cu usturoi · sos roșu picant — 6 lei / porție</div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- GARNITURI -->
+    <section class="category" id="garnituri">
+        <div class="cat-head"><span class="cat-num">VII.</span><h2 class="cat-title">Garnituri</h2></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Cartofi prăjiți</span><span class="dots"></span><span class="dish-price">18 lei</span></div>
+            <div class="dish-meta"><span>200 g · 390 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Cartofi copți cu rozmarin</span><span class="dots"></span><span class="dish-price">20 lei</span></div>
+            <div class="dish-desc">Ulei de măsline extravirgin, usturoi.</div>
+            <div class="dish-meta"><span>200 g · 240 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Legume la grătar</span><span class="dots"></span><span class="dish-price">24 lei</span></div>
+            <div class="dish-desc">Zucchini, vinete, ardei gras, ciuperci, ulei aromatizat cu usturoi și pătrunjel.</div>
+            <div class="dish-meta"><span>240 g · 150 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Mix de salată</span><span class="dots"></span><span class="dish-price">22 lei</span></div>
+            <div class="dish-desc">Salată verde, roșii cherry, castraveți, citronette de lămâie.</div>
+            <div class="dish-meta"><span>220 g · 95 kcal</span></div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- SALATE -->
+    <section class="category" id="salate">
+        <div class="cat-head"><span class="cat-num">VIII.</span><h2 class="cat-title">Salate</h2></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salata Giovanni's</span><span class="dots"></span><span class="dish-price">57 lei</span></div>
+            <div class="dish-desc">Salată verde, piept de pui grill, bacon crocant, crutoane, Parmigiano Reggiano, dressing Caesar, roșii cherry.</div>
+            <div class="dish-meta"><span>485 g · 690 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salata Grecească</span><span class="dots"></span><span class="dish-price">46 lei</span></div>
+            <div class="dish-desc">Salată verde, roșii, castravete, ardei gras, ceapă roșie, măsline Kalamata, brânză feta.</div>
+            <div class="dish-meta"><span>250 g · 350 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salată cu creveți &amp; avocado</span><span class="dots"></span><span class="dish-price">64 lei</span></div>
+            <div class="dish-desc">Salată verde, creveți grill, avocado, roșii cherry, castravete.</div>
+            <div class="dish-meta"><span>250 g · 510 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salata Caprese</span><span class="dots"></span><span class="dish-price">48 lei</span></div>
+            <div class="dish-desc">Roșii, mozzarella di bufala, busuioc proaspăt, ulei de măsline extravirgin.</div>
+            <div class="dish-meta"><span>340 g · 390 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salată cu pui crispy</span><span class="dots"></span><span class="dish-price">54 lei</span></div>
+            <div class="dish-desc">Salată verde, piept de pui crispy, roșii cherry, castravete, porumb dulce, dressing de iaurt cu usturoi.</div>
+            <div class="dish-meta"><span>250 g · 400 kcal</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Salată cu ton</span><span class="dots"></span><span class="dish-price">52 lei</span></div>
+            <div class="dish-desc">Salată verde, ton, roșii cherry, castravete, ceapă roșie, porumb dulce, măsline.</div>
+            <div class="dish-meta"><span>350 g · 430 kcal</span></div></div>
+    </section>
+
+    <div class="divider"><span class="l"></span>
+        <svg width="30" height="16" viewBox="0 0 30 16"><path d="M2 8 C10 -2, 20 -2, 28 8" stroke="#B08A4E" stroke-width="1" fill="none"/><circle cx="15" cy="6" r="1.5" fill="#8F9A70"/></svg>
+        <span class="r"></span></div>
+
+    <!-- DESERT -->
+    <section class="category" id="desert">
+        <div class="cat-head"><span class="cat-num">IX.</span><h2 class="cat-title">Desert</h2></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tiramisu Classico</span><span class="dots"></span><span class="dish-price">28 lei</span></div>
+            <div class="dish-desc">Pișcoturi Savoiardi, cremă din mascarpone, espresso, cacao.</div>
+            <div class="dish-meta"><span>150 g · 300 kcal</span><span class="alg">Gluten, ouă, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Tiramisu Artigianale</span><span class="dots"></span><span class="dish-price">28 lei</span></div>
+            <div class="dish-desc">Pișcoturi Savoiardi, cremă din mascarpone, arome variabile: clasic, căpșuni sau lămâie.</div>
+            <div class="dish-meta"><span>150 g · 300 kcal</span><span class="alg">Gluten, ouă, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Cremoso Artigianale</span><span class="dots"></span><span class="dish-price">28 lei</span></div>
+            <div class="dish-desc">Cremă fină artizanală, piure de fructe, crumble Biscoff, fructe proaspete.</div>
+            <div class="dish-meta"><span>250 g · 370 kcal</span><span class="alg">Gluten, lapte</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Cheesecake Artigianal</span><span class="dots"></span><span class="dish-price">25 lei / felie</span></div>
+            <div class="dish-desc">Bază crocantă din biscuiți și unt, cremă fină de brânză, topping variabil: Dubai, fructe de sezon sau Ferrero.</div>
+            <div class="dish-meta"><span>100 g · 380–450 kcal</span><span class="alg">Gluten, lapte, ouă</span></div></div>
+
+        <div class="dish"><div class="dish-top"><span class="dish-name">Panna Cotta</span><span class="dots"></span><span class="dish-price">26 lei</span></div>
+            <div class="dish-desc">Smântână pentru frișcă, lapte, vanilie Bourbon, topping de fructe.</div>
+            <div class="dish-meta"><span>200 g · 350 kcal</span><span class="alg">Lapte</span></div></div>
+    </section>
+
+    <!-- ALERGENI -->
+    <div class="allergen-box" id="alergeni">
+        <h3>Listă alergeni</h3>
+        <p style="font-size:13.5px; color:var(--ink-soft); margin-top:0;">Unele produse din meniul nostru pot conține alergeni. Dacă sunteți intolerant(ă) sau alergic(ă) la un ingredient, vă rugăm să consultați lista de mai jos și/sau să întrebați personalul restaurantului înainte de a comanda.</p>
+        <details>
+            <summary>Vezi lista completă</summary>
+            <ul>
+                <li>Cereale care conțin gluten (grâu, secară, orz, ovăz, grâu spelt, grâu mare sau hibrizi ai acestora)</li>
+                <li>Crustacee și produse derivate</li>
+                <li>Ouă și produse derivate</li>
+                <li>Pește și produse derivate</li>
+                <li>Soia și produse derivate</li>
+                <li>Lapte și produse derivate (inclusiv lactoză)</li>
+                <li>Fructe cu coajă: migdale, alune de pădure, nuci, caju, fistic, nuci de macadamia și produse derivate</li>
+                <li>Țelină și produse derivate</li>
+                <li>Semințe de susan și produse derivate</li>
+                <li>Dioxid de sulf și sulfiți, în concentrații peste 10 mg/l</li>
+                <li>Lupin și produse derivate</li>
+                <li>Moluște și produse derivate</li>
+            </ul>
+            <p style="font-size:12.5px; font-style:italic; color:var(--ink-soft);">Some products in our menu may contain allergens. Please consult our staff before ordering if you have any intolerance or allergy.</p>
+        </details>
+    </div>
+
+    <footer>
+        <span class="fmark">Buon appetito</span>
+        Giovanni's Ristorante &amp; Bar
+    </footer>
+
+</div>
+
+<script>
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('.category, .allergen-box');
+    const links = document.querySelectorAll('#catnav a');
+    const setActive = () => {
+        let current = '';
+        sections.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top <= 130) current = '#' + sec.id;
+        });
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === current));
+    };
+    document.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+</script>
+</body>
+</html>
