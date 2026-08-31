@@ -879,6 +879,55 @@
     }
 
     /* ============================================================
+       KITCHEN (menu teaser band)
+       ============================================================ */
+    .kitchen{
+      position:relative;
+      padding:160px 0;
+      text-align:center;
+      overflow:hidden;
+    }
+    .kitchen-arch{
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:min(50vw, 620px);
+      height:auto;
+      opacity:0.05;
+      z-index:0;
+      pointer-events:none;
+    }
+    .kitchen-inner{
+      position:relative;
+      z-index:1;
+      max-width:640px;
+      margin:0 auto;
+      padding:0 6vw;
+    }
+    .kitchen .eyebrow{ justify-content:center; }
+    .kitchen h3{
+      margin-top:22px;
+      font-family:var(--serif);
+      font-weight:400;
+      font-size:clamp(2rem, 3.8vw, 3.1rem);
+      line-height:1.16;
+      letter-spacing:-0.005em;
+    }
+    .kitchen h3 em{ font-style:italic; color:var(--gold); font-weight:400; }
+    .kitchen p{
+      margin:26px auto 0;
+      max-width:42ch;
+      font-size:1.02rem;
+      line-height:1.8;
+      color:var(--espresso-soft);
+      font-weight:300;
+    }
+    .kitchen-cta{
+      margin-top:44px;
+      display:inline-flex;
+    }
+
+    /* ============================================================
        VISIT / RESERVE
        ============================================================ */
     .visit{
@@ -1144,6 +1193,9 @@
       #philosophy .split-text{ padding-top:0; margin-top:44px; }
       #philosophy blockquote{ max-width:none; }
 
+      .kitchen{ padding:110px 0; }
+      .kitchen-arch{ width:70vw; }
+
       .visit-info{ grid-template-columns:1fr; gap:28px; }
 
       .footer-top{ grid-template-columns:1fr; gap:44px; padding-bottom:56px; }
@@ -1166,6 +1218,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#story" data-nav data-i18n="nav.story">Povestea</a></li>
     <li><a href="#room" data-nav data-i18n="nav.room">Sala</a></li>
+    <li><a href="meniu.html" target="_blank" rel="noopener" data-nav data-i18n="nav.menu">Meniu</a></li>
     <li><a href="#details" data-nav data-i18n="nav.details">Detaliile</a></li>
     <li><a href="#visit" data-nav data-i18n="nav.visit">Vizitează-ne</a></li>
     <li><a href="tel:+40741682682" class="cta" data-nav data-i18n="nav.reserve">Rezervă</a></li>
@@ -1412,6 +1465,25 @@
   </div>
 </section>
 
+<!-- ================= KITCHEN (menu teaser) ================= -->
+<section class="kitchen" id="kitchen">
+  <svg class="kitchen-arch" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 19V9.5C2 5.35786 5.35786 2 9.5 2C13.6421 2 17 5.35786 17 9.5V19" stroke="var(--espresso)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <path d="M13 19V9.5C13 5.35786 16.3579 2 20.5 2C24.6421 2 28 5.35786 28 9.5V19" stroke="var(--espresso)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <line x1="1" y1="19.4" x2="29" y2="19.4" stroke="var(--espresso)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+  </svg>
+  <div class="kitchen-inner reveal">
+    <span class="eyebrow" data-i18n="kitchen.eyebrow">Bucătăria Noastră</span>
+    <h3 data-i18n-html="kitchen.title">Rețete italienești,<br>pregătite cu <em>răbdare</em>.</h3>
+    <p data-i18n="kitchen.body">De la aperitive cu fructe de mare la paste făcute după rețete
+      clasice și pizza cu fermentație lentă — fiecare fel spune aceeași
+      poveste ca și restul casei: simplu, autentic, fără grabă.</p>
+    <div class="kitchen-cta">
+      <a href="meniu.html" target="_blank" rel="noopener" class="btn-solid" data-i18n="kitchen.cta">Vezi Meniul Complet</a>
+    </div>
+  </div>
+</section>
+
 <!-- ================= VISIT ================= -->
 <section class="visit" id="visit">
   <div class="visit-grid">
@@ -1474,6 +1546,7 @@
         <h5 data-i18n="footer.explore_label">Explorează</h5>
         <a href="#story" data-i18n="nav.story">Povestea</a>
         <a href="#room" data-i18n="nav.room">Sala</a>
+        <a href="meniu.html" target="_blank" rel="noopener" data-i18n="nav.menu">Meniu</a>
         <a href="#details" data-i18n="nav.details">Detaliile</a>
         <a href="#visit" data-i18n="nav.visit">Vizitează-ne</a>
       </div>
@@ -1498,153 +1571,161 @@
 
 <script>
   (function(){
-  var translations = {
-    ro: {
-      'nav.story':'Povestea','nav.room':'Sala','nav.details':'Detaliile','nav.visit':'Vizitează-ne','nav.reserve':'Rezervă',
-      'hero.img_alt':"Un coridor discret la Giovanni's, cu două arcade iluminate din spate care înfățișează Amalfi și Veneția, podea de marmură și stâlpi de alamă cu șnur",
-      'hero.title':'Săli liniștite,<br><em>mese</em> generoase.',
-      'hero.sub':"Giovanni's e o masă așezată în stil italian — fără grabă, luminată cald, gândită pentru seri care nu se termină repede.",
-      'hero.cta':'Rezervă o masă',
-      'hero.story_link':'Povestea noastră ↓',
-      'hero.scroll':'Derulează',
-      'story.eyebrow':'Povestea Noastră',
-      'story.chapter':'Capitolul Unu',
-      'story.statement':'<span class="intro-cap">N</span>u ne-am propus să construim un restaurant care doar arată a Italia. Am construit unul care <em>se simte</em> ca ora de după un prânz lung — fără grabă, bine luminat și complet relaxat.',
-      'story.body':"Giovanni's a pornit de la o convingere simplă: că o masă bună spune tot ce trebuie să spună un restaurant bun. Marmură sub picioare, alamă încălzită de lumină joasă, pahare ridicate fără ceremonie. Tot restul — arcadele, lenjeria, liniștea — este în slujba acelei mese, și a serii construite în jurul ei.",
-      'story.signature':"Giovanni's, cu același standard din prima zi",
-      'story.figure_alt':'Detaliu al unei mese de marmură cu margine de alamă, scaune de catifea și un mural cu un canal din Veneția în fundal',
-      'story.figure_cap':'<b>Masa Paisprezece</b>Alamă, marmură și o priveliște care nu părăsește niciodată Veneția.',
-      'banner.eyebrow':'Un Strop de Altundeva',
-      'banner.title':'Fiecare cameră împrumută<br>puțină lumină din Italia.',
-      'banner.img_alt':"Un mural pictat manual cu gondole venețiene ancorate pe un canal, văzut printre un măslin și o masă de restaurant din interiorul Giovanni's",
-      'room.eyebrow':'Sala','room.chapter':'Capitolul Doi','room.title':'Gândită pentru o seară lungă.',
-      'room.body':'Ferestrele înalte, arcuite, păstrează ultima lumină a zilei mult după ce ar fi trebuit să dispară. Candelabrele sunt joase și calde. Catifeaua își păstrează forma pe durata unei cine de trei ore — pentru că aici, așa e gândită o cină.',
-      'room.stat1_label':'Locuri','room.stat2_label':'Tavan','room.stat3_label':'Tură, fără grabă',
-      'room.img_alt':"Sala principală de mese la Giovanni's, cu ferestre arcuite, candelabre de cristal, podele de marmură și portrete contemporane în tonuri închise",
-      'room.tag':'Sala De Mese',
-      'bar.img_alt':"Intrarea la Giovanni's, cu placare din calcar și ușă arcuită din sticlă și metal negru",
-      'bar.tag':'Intrarea','bar.eyebrow':'Barul','bar.title':'Acolo unde începe, de obicei, seara.',
-      'bar.body':"Tencuiala verde-smarald, iluminată din spate și răcoroasă pentru ochi, ține Prosecco-ul mereu la îndemână. Espresso curge toată ziua; ceva mai puternic preia rolul odată cu apusul. Oricum ar fi, ești binevenit să mai zăbovești la tejghea înainte să fii chemat la masă.",
-      'bar.stat1_label':'Ore zilnic','bar.stat2_label':'Etichete italiene',
-      'details.eyebrow':'Detaliile','details.chapter':'Capitolul Trei',
-      'details.title':'Deciziile mici<br>pe care le simți, nu le vezi.',
-      'details.body':'Nimic decorativ — fiecare suprafață, fiecare turnare și fiecare corp de iluminat a fost ales ca să dispară discret în seară.',
-      'details.item1_alt':'Un rând de sticle de Prosecco iluminate într-o firidă verde-smarald la bar',
-      'details.item1':'<b>Turnarea</b><span>Prosecco, mereu la îndemână</span>',
-      'details.item2_alt':'Un perete cu rafturi deschise, cu vinuri italiene, așezate manual pe rafturi de stejar alb',
-      'details.item2':'<b>Crama</b><span>Patruzeci de etichete, așezate manual</span>',
-      'details.item3_alt':"Tejgheaua de marmură Giovanni's sub două firide verde-smarald iluminate din spate, cu personalul turnând la robinete",
-      'details.item3':'<b>Tejgheaua</b><span>Acolo unde numele e sculptat în marmură</span>',
-      'philosophy.img_alt':"Placare din calcar cald cu inscripția Giovanni's — Autentic Italian Delicios, la intrare",
-      'philosophy.tag':'Intrarea','philosophy.eyebrow':'Filosofie',
-      'philosophy.quote':'Autentic nu înseamnă zgomotos. Al nostru e genul de italienesc care vorbește încet și toarnă din belșug.',
-      'philosophy.attr':"Giovanni's, Filosofia Casei",
-      'visit.eyebrow':'Vizitează-ne','visit.title':'Vino așa cum ești, rămâi cât vrei.',
-      'visit.body':'La bar ești mereu binevenit fără rezervare. Pentru sala de mese, o masă rezervată din timp face seara mai simplă.',
-      'visit.hours_label':'Program',
-      'visit.hours':'<b>Mar – Vin</b> 12:00 — 23:00<br><b>Sâm – Dum</b> 11:00 — 00:00<br><b>Luni</b> Închis',
-      'visit.find_label':'Ne Găsești',
-      'visit.address':"<b>Giovanni's Ristorante &amp; Bar</b><br>Strada Victoriei 28, Negrești-Oaș",
-      'visit.phone_label':'Telefon',
-      'visit.cta':'Solicită o masă','visit.back_top':'Înapoi sus ↑',
-      'visit.img_alt':"Un mural arcuit, iluminat din spate, cu un canal din Veneția, strălucind la intrarea în sala de mese Giovanni's",
-      'footer.tag':'O masă italiană de lux discret — marmură, alamă și seri care nu se grăbesc.',
-      'footer.explore_label':'Explorează','footer.follow_label':'Urmărește-ne',
-      'footer.address':'Strada Victoriei 28, Negrești-Oaș',
-      'footer.copyright':"© 2026 Giovanni's Ristorante &amp; Bar. Toate drepturile rezervate.",
-      'footer.tagline':'Un site gândit, nu un șablon.'
-    },
-    en: {
-      'nav.story':'The Story','nav.room':'The Room','nav.details':'The Details','nav.visit':'Visit','nav.reserve':'Reserve',
-      'hero.img_alt':"A dimly lit corridor at Giovanni's, lined with two backlit archways depicting Amalfi and Venice, marble floor and brass rope stanchions",
-      'hero.title':'Quiet rooms,<br><em>generous</em> tables.',
-      'hero.sub':"Giovanni's is a table set the Italian way — unhurried, warmly lit, and built for evenings that run long.",
-      'hero.cta':'Reserve a table',
-      'hero.story_link':'Our story ↓',
-      'hero.scroll':'Scroll',
-      'story.eyebrow':'Our Story',
-      'story.chapter':'Chapter One',
-      'story.statement':'<span class="intro-cap">W</span>e didn\'t set out to build a restaurant that looks Italian. We built one that <em>feels</em> like the hour after a long lunch — unrushed, well lit, and entirely at ease.',
-      'story.body':"Giovanni's began with a simple conviction: that a good table says everything a good restaurant needs to. Marble underfoot, brass warmed by low light, glass raised without ceremony. Everything else — the arches, the linen, the quiet — is in service of that one table, and the evening built around it.",
-      'story.signature':"Giovanni's, held to one standard since day one",
-      'story.figure_alt':'Close detail of a marble table edged in brass, velvet chairs, and a Venice canal mural in the background',
-      'story.figure_cap':'<b>Table Fourteen</b>Brass, marble, and a view that never leaves Venice.',
-      'banner.eyebrow':'A Sense of Elsewhere',
-      'banner.title':'Every room borrows<br>a little light from Italy.',
-      'banner.img_alt':"A hand-painted mural of Venetian gondolas moored along a canal, seen past an olive tree and dining table inside Giovanni's",
-      'room.eyebrow':'The Room','room.chapter':'Chapter Two','room.title':'Built for the long evening.',
-      'room.body':"High arched windows carry the last of the daylight long past when it should have gone. Chandeliers are kept low and warm. Velvet holds its shape through a three-hour dinner — because here, that's simply how dinner is meant to run.",
-      'room.stat1_label':'Covers','room.stat2_label':'Ceilings','room.stat3_label':'Sitting, unrushed',
-      'room.img_alt':"The main dining room at Giovanni's with arched black-framed windows, crystal chandeliers, marble floors and dark contemporary portrait art",
-      'room.tag':'The Dining Room',
-      'bar.img_alt':'The entrance at Giovanni\'s, with limestone cladding and an arched glass and black metal door',
-      'bar.tag':'The Entrance','bar.eyebrow':'The Bar','bar.title':'Where the evening usually starts.',
-      'bar.body':"Emerald plaster, backlit and cool to the eye, holds the Prosecco at the ready. Espresso runs all day; something stronger takes over once the sun does. Either way, you're welcome to linger at the counter before your table is called.",
-      'bar.stat1_label':'Hours daily','bar.stat2_label':'Italian labels',
-      'details.eyebrow':'The Details','details.chapter':'Chapter Three',
-      'details.title':'The small decisions<br>you feel, not see.',
-      'details.body':'Nothing ornamental — every surface, pour, and light fixture was chosen to disappear quietly into the evening.',
-      'details.item1_alt':'A row of Prosecco bottles lit within a backlit emerald archway at the bar',
-      'details.item1':'<b>The Pour</b><span>Prosecco, kept at the ready</span>',
-      'details.item2_alt':'An open shelving wall stocked with Italian wine, arranged by hand along white oak shelves',
-      'details.item2':'<b>The Cellar</b><span>Forty labels, arranged by hand</span>',
-      'details.item3_alt':"The marble Giovanni's bar counter beneath twin backlit emerald archways, with staff pouring behind the taps",
-      'details.item3':'<b>The Counter</b><span>Where the name is carved in marble</span>',
-      'philosophy.img_alt':"Warm limestone cladding with the Giovanni's Autentic Italian Delicios sign at the entrance",
-      'philosophy.tag':'The Entrance','philosophy.eyebrow':'Philosophy',
-      'philosophy.quote':'Authentic doesn\'t mean loud. Ours is the kind of Italian that speaks quietly and pours generously.',
-      'philosophy.attr':"Giovanni's, House Philosophy",
-      'visit.eyebrow':'Visit','visit.title':'Come as you are, stay as long as you like.',
-      'visit.body':'Walk-ins are always welcome at the bar. For the dining room, a table held ahead makes the evening easier.',
-      'visit.hours_label':'Hours',
-      'visit.hours':'<b>Tue – Fri</b> 12:00 — 23:00<br><b>Sat – Sun</b> 11:00 — 00:00<br><b>Monday</b> Closed',
-      'visit.find_label':'Find Us',
-      'visit.address':"<b>Giovanni's Ristorante &amp; Bar</b><br>28 Victoriei Street, Negrești-Oaș",
-      'visit.phone_label':'Phone',
-      'visit.cta':'Request a table','visit.back_top':'Back to top ↑',
-      'visit.img_alt':"An arched, backlit Venice canal mural glowing at the entrance to Giovanni's dining room",
-      'footer.tag':'An Italian table of quiet luxury — marble, brass, and evenings that take their time.',
-      'footer.explore_label':'Explore','footer.follow_label':'Follow',
-      'footer.address':'28 Victoriei Street, Negrești-Oaș',
-      'footer.copyright':"© 2026 Giovanni's Ristorante &amp; Bar. All rights reserved.",
-      'footer.tagline':'Site by design, not by template.'
+    var translations = {
+      ro: {
+        'nav.story':'Povestea','nav.room':'Sala','nav.menu':'Meniu','nav.details':'Detaliile','nav.visit':'Vizitează-ne','nav.reserve':'Rezervă',
+        'hero.img_alt':"Un coridor discret la Giovanni's, cu două arcade iluminate din spate care înfățișează Amalfi și Veneția, podea de marmură și stâlpi de alamă cu șnur",
+        'hero.title':'Săli liniștite,<br><em>mese</em> generoase.',
+        'hero.sub':"Giovanni's e o masă așezată în stil italian — fără grabă, luminată cald, gândită pentru seri care nu se termină repede.",
+        'hero.cta':'Rezervă o masă',
+        'hero.story_link':'Povestea noastră ↓',
+        'hero.scroll':'Derulează',
+        'story.eyebrow':'Povestea Noastră',
+        'story.chapter':'Capitolul Unu',
+        'story.statement':'<span class="intro-cap">N</span>u ne-am propus să construim un restaurant care doar arată a Italia. Am construit unul care <em>se simte</em> ca ora de după un prânz lung — fără grabă, bine luminat și complet relaxat.',
+        'story.body':"Giovanni's a pornit de la o convingere simplă: că o masă bună spune tot ce trebuie să spună un restaurant bun. Marmură sub picioare, alamă încălzită de lumină joasă, pahare ridicate fără ceremonie. Tot restul — arcadele, lenjeria, liniștea — este în slujba acelei mese, și a serii construite în jurul ei.",
+        'story.signature':"Giovanni's, cu același standard din prima zi",
+        'story.figure_alt':'Detaliu al unei mese de marmură cu margine de alamă, scaune de catifea și un mural cu un canal din Veneția în fundal',
+        'story.figure_cap':'<b>Masa Paisprezece</b>Alamă, marmură și o priveliște care nu părăsește niciodată Veneția.',
+        'banner.eyebrow':'Un Strop de Altundeva',
+        'banner.title':'Fiecare cameră împrumută<br>puțină lumină din Italia.',
+        'banner.img_alt':"Un mural pictat manual cu gondole venețiene ancorate pe un canal, văzut printre un măslin și o masă de restaurant din interiorul Giovanni's",
+        'room.eyebrow':'Sala','room.chapter':'Capitolul Doi','room.title':'Gândită pentru o seară lungă.',
+        'room.body':'Ferestrele înalte, arcuite, păstrează ultima lumină a zilei mult după ce ar fi trebuit să dispară. Candelabrele sunt joase și calde. Catifeaua își păstrează forma pe durata unei cine de trei ore — pentru că aici, așa e gândită o cină.',
+        'room.stat1_label':'Locuri','room.stat2_label':'Tavan','room.stat3_label':'Tură, fără grabă',
+        'room.img_alt':"Sala principală de mese la Giovanni's, cu ferestre arcuite, candelabre de cristal, podele de marmură și portrete contemporane în tonuri închise",
+        'room.tag':'Sala De Mese',
+        'bar.img_alt':"Intrarea la Giovanni's, cu placare din calcar și ușă arcuită din sticlă și metal negru",
+        'bar.tag':'Intrarea','bar.eyebrow':'Barul','bar.title':'Acolo unde începe, de obicei, seara.',
+        'bar.body':"Tencuiala verde-smarald, iluminată din spate și răcoroasă pentru ochi, ține Prosecco-ul mereu la îndemână. Espresso curge toată ziua; ceva mai puternic preia rolul odată cu apusul. Oricum ar fi, ești binevenit să mai zăbovești la tejghea înainte să fii chemat la masă.",
+        'bar.stat1_label':'Ore zilnic','bar.stat2_label':'Etichete italiene',
+        'details.eyebrow':'Detaliile','details.chapter':'Capitolul Trei',
+        'details.title':'Deciziile mici<br>pe care le simți, nu le vezi.',
+        'details.body':'Nimic decorativ — fiecare suprafață, fiecare turnare și fiecare corp de iluminat a fost ales ca să dispară discret în seară.',
+        'details.item1_alt':'Un rând de sticle de Prosecco iluminate într-o firidă verde-smarald la bar',
+        'details.item1':'<b>Turnarea</b><span>Prosecco, mereu la îndemână</span>',
+        'details.item2_alt':'Un perete cu rafturi deschise, cu vinuri italiene, așezate manual pe rafturi de stejar alb',
+        'details.item2':'<b>Crama</b><span>Patruzeci de etichete, așezate manual</span>',
+        'details.item3_alt':"Tejgheaua de marmură Giovanni's sub două firide verde-smarald iluminate din spate, cu personalul turnând la robinete",
+        'details.item3':'<b>Tejgheaua</b><span>Acolo unde numele e sculptat în marmură</span>',
+        'philosophy.img_alt':"Placare din calcar cald cu inscripția Giovanni's — Autentic Italian Delicios, la intrare",
+        'philosophy.tag':'Intrarea','philosophy.eyebrow':'Filosofie',
+        'philosophy.quote':'Autentic nu înseamnă zgomotos. Al nostru e genul de italienesc care vorbește încet și toarnă din belșug.',
+        'philosophy.attr':"Giovanni's, Filosofia Casei",
+        'kitchen.eyebrow':'Bucătăria Noastră',
+        'kitchen.title':'Rețete italienești,<br>pregătite cu <em>răbdare</em>.',
+        'kitchen.body':'De la aperitive cu fructe de mare la paste făcute după rețete clasice și pizza cu fermentație lentă — fiecare fel spune aceeași poveste ca și restul casei: simplu, autentic, fără grabă.',
+        'kitchen.cta':'Vezi Meniul Complet',
+        'visit.eyebrow':'Vizitează-ne','visit.title':'Vino așa cum ești, rămâi cât vrei.',
+        'visit.body':'La bar ești mereu binevenit fără rezervare. Pentru sala de mese, o masă rezervată din timp face seara mai simplă.',
+        'visit.hours_label':'Program',
+        'visit.hours':'<b>Mar – Vin</b> 12:00 — 23:00<br><b>Sâm – Dum</b> 11:00 — 00:00<br><b>Luni</b> Închis',
+        'visit.find_label':'Ne Găsești',
+        'visit.address':"<b>Giovanni's Ristorante &amp; Bar</b><br>Strada Victoriei 28, Negrești-Oaș",
+        'visit.phone_label':'Telefon',
+        'visit.cta':'Solicită o masă','visit.back_top':'Înapoi sus ↑',
+        'visit.img_alt':"Un mural arcuit, iluminat din spate, cu un canal din Veneția, strălucind la intrarea în sala de mese Giovanni's",
+        'footer.tag':'O masă italiană de lux discret — marmură, alamă și seri care nu se grăbesc.',
+        'footer.explore_label':'Explorează','footer.follow_label':'Urmărește-ne',
+        'footer.address':'Strada Victoriei 28, Negrești-Oaș',
+        'footer.copyright':"© 2026 Giovanni's Ristorante &amp; Bar. Toate drepturile rezervate.",
+        'footer.tagline':'Un site gândit, nu un șablon.'
+      },
+      en: {
+        'nav.story':'The Story','nav.room':'The Room','nav.menu':'Menu','nav.details':'The Details','nav.visit':'Visit','nav.reserve':'Reserve',
+        'hero.img_alt':"A dimly lit corridor at Giovanni's, lined with two backlit archways depicting Amalfi and Venice, marble floor and brass rope stanchions",
+        'hero.title':'Quiet rooms,<br><em>generous</em> tables.',
+        'hero.sub':"Giovanni's is a table set the Italian way — unhurried, warmly lit, and built for evenings that run long.",
+        'hero.cta':'Reserve a table',
+        'hero.story_link':'Our story ↓',
+        'hero.scroll':'Scroll',
+        'story.eyebrow':'Our Story',
+        'story.chapter':'Chapter One',
+        'story.statement':'<span class="intro-cap">W</span>e didn\'t set out to build a restaurant that looks Italian. We built one that <em>feels</em> like the hour after a long lunch — unrushed, well lit, and entirely at ease.',
+        'story.body':"Giovanni's began with a simple conviction: that a good table says everything a good restaurant needs to. Marble underfoot, brass warmed by low light, glass raised without ceremony. Everything else — the arches, the linen, the quiet — is in service of that one table, and the evening built around it.",
+        'story.signature':"Giovanni's, held to one standard since day one",
+        'story.figure_alt':'Close detail of a marble table edged in brass, velvet chairs, and a Venice canal mural in the background',
+        'story.figure_cap':'<b>Table Fourteen</b>Brass, marble, and a view that never leaves Venice.',
+        'banner.eyebrow':'A Sense of Elsewhere',
+        'banner.title':'Every room borrows<br>a little light from Italy.',
+        'banner.img_alt':"A hand-painted mural of Venetian gondolas moored along a canal, seen past an olive tree and dining table inside Giovanni's",
+        'room.eyebrow':'The Room','room.chapter':'Chapter Two','room.title':'Built for the long evening.',
+        'room.body':"High arched windows carry the last of the daylight long past when it should have gone. Chandeliers are kept low and warm. Velvet holds its shape through a three-hour dinner — because here, that's simply how dinner is meant to run.",
+        'room.stat1_label':'Covers','room.stat2_label':'Ceilings','room.stat3_label':'Sitting, unrushed',
+        'room.img_alt':"The main dining room at Giovanni's with arched black-framed windows, crystal chandeliers, marble floors and dark contemporary portrait art",
+        'room.tag':'The Dining Room',
+        'bar.img_alt':'The entrance at Giovanni\'s, with limestone cladding and an arched glass and black metal door',
+        'bar.tag':'The Entrance','bar.eyebrow':'The Bar','bar.title':'Where the evening usually starts.',
+        'bar.body':"Emerald plaster, backlit and cool to the eye, holds the Prosecco at the ready. Espresso runs all day; something stronger takes over once the sun does. Either way, you're welcome to linger at the counter before your table is called.",
+        'bar.stat1_label':'Hours daily','bar.stat2_label':'Italian labels',
+        'details.eyebrow':'The Details','details.chapter':'Chapter Three',
+        'details.title':'The small decisions<br>you feel, not see.',
+        'details.body':'Nothing ornamental — every surface, pour, and light fixture was chosen to disappear quietly into the evening.',
+        'details.item1_alt':'A row of Prosecco bottles lit within a backlit emerald archway at the bar',
+        'details.item1':'<b>The Pour</b><span>Prosecco, kept at the ready</span>',
+        'details.item2_alt':'An open shelving wall stocked with Italian wine, arranged by hand along white oak shelves',
+        'details.item2':'<b>The Cellar</b><span>Forty labels, arranged by hand</span>',
+        'details.item3_alt':"The marble Giovanni's bar counter beneath twin backlit emerald archways, with staff pouring behind the taps",
+        'details.item3':'<b>The Counter</b><span>Where the name is carved in marble</span>',
+        'philosophy.img_alt':"Warm limestone cladding with the Giovanni's Autentic Italian Delicios sign at the entrance",
+        'philosophy.tag':'The Entrance','philosophy.eyebrow':'Philosophy',
+        'philosophy.quote':'Authentic doesn\'t mean loud. Ours is the kind of Italian that speaks quietly and pours generously.',
+        'philosophy.attr':"Giovanni's, House Philosophy",
+        'kitchen.eyebrow':'Our Kitchen',
+        'kitchen.title':'Italian recipes,<br>made with <em>patience</em>.',
+        'kitchen.body':"From seafood starters to pasta made the classic way and slow-fermented pizza — every dish tells the same story as the rest of the house: simple, authentic, unhurried.",
+        'kitchen.cta':'View Full Menu',
+        'visit.eyebrow':'Visit','visit.title':'Come as you are, stay as long as you like.',
+        'visit.body':'Walk-ins are always welcome at the bar. For the dining room, a table held ahead makes the evening easier.',
+        'visit.hours_label':'Hours',
+        'visit.hours':'<b>Tue – Fri</b> 12:00 — 23:00<br><b>Sat – Sun</b> 11:00 — 00:00<br><b>Monday</b> Closed',
+        'visit.find_label':'Find Us',
+        'visit.address':"<b>Giovanni's Ristorante &amp; Bar</b><br>28 Victoriei Street, Negrești-Oaș",
+        'visit.phone_label':'Phone',
+        'visit.cta':'Request a table','visit.back_top':'Back to top ↑',
+        'visit.img_alt':"An arched, backlit Venice canal mural glowing at the entrance to Giovanni's dining room",
+        'footer.tag':'An Italian table of quiet luxury — marble, brass, and evenings that take their time.',
+        'footer.explore_label':'Explore','footer.follow_label':'Follow',
+        'footer.address':'28 Victoriei Street, Negrești-Oaș',
+        'footer.copyright':"© 2026 Giovanni's Ristorante &amp; Bar. All rights reserved.",
+        'footer.tagline':'Site by design, not by template.'
+      }
+    };
+
+    function applyLanguage(lang){
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var key = el.getAttribute('data-i18n');
+        var val = translations[lang] && translations[lang][key];
+        if(val !== undefined){ el.textContent = val; }
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+        var key = el.getAttribute('data-i18n-html');
+        var val = translations[lang] && translations[lang][key];
+        if(val !== undefined){ el.innerHTML = val; }
+      });
+      document.querySelectorAll('[data-i18n-alt]').forEach(function(el){
+        var key = el.getAttribute('data-i18n-alt');
+        var val = translations[lang] && translations[lang][key];
+        if(val !== undefined){ el.setAttribute('alt', val); }
+      });
+      document.documentElement.setAttribute('lang', lang);
+      document.querySelectorAll('.lang-opt').forEach(function(el){
+        el.classList.toggle('active', el.getAttribute('data-lang-opt') === lang);
+      });
+      try{ localStorage.setItem('giovannis_lang', lang); }catch(e){}
     }
-  };
 
-  function applyLanguage(lang){
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var key = el.getAttribute('data-i18n');
-      var val = translations[lang] && translations[lang][key];
-      if(val !== undefined){ el.textContent = val; }
-    });
-    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
-      var key = el.getAttribute('data-i18n-html');
-      var val = translations[lang] && translations[lang][key];
-      if(val !== undefined){ el.innerHTML = val; }
-    });
-    document.querySelectorAll('[data-i18n-alt]').forEach(function(el){
-      var key = el.getAttribute('data-i18n-alt');
-      var val = translations[lang] && translations[lang][key];
-      if(val !== undefined){ el.setAttribute('alt', val); }
-    });
-    document.documentElement.setAttribute('lang', lang);
-    document.querySelectorAll('.lang-opt').forEach(function(el){
-      el.classList.toggle('active', el.getAttribute('data-lang-opt') === lang);
-    });
-    try{ localStorage.setItem('giovannis_lang', lang); }catch(e){}
-  }
+    var langToggle = document.getElementById('langToggle');
+    if(langToggle){
+      langToggle.addEventListener('click', function(){
+        var current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ro';
+        applyLanguage(current === 'ro' ? 'en' : 'ro');
+      });
+    }
 
-  var langToggle = document.getElementById('langToggle');
-  if(langToggle){
-    langToggle.addEventListener('click', function(){
-      var current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ro';
-      applyLanguage(current === 'ro' ? 'en' : 'ro');
-    });
-  }
-
-  var savedLang = 'ro';
-  try{ savedLang = localStorage.getItem('giovannis_lang') || 'ro'; }catch(e){}
-  applyLanguage(savedLang);
+    var savedLang = 'ro';
+    try{ savedLang = localStorage.getItem('giovannis_lang') || 'ro'; }catch(e){}
+    applyLanguage(savedLang);
 
     // Nav scroll state
     var nav = document.getElementById('siteNav');
