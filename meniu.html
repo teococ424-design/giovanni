@@ -35,7 +35,8 @@ button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 <button data-go="1" aria-label="Mergi la cuprins">Cuprins</button><button id="nx" aria-label="Pagina următoare">Înainte &#8250;</button>
 </nav>
 <script>
-const IM=["meniu-pagina-00.jpg", "meniu-pagina-01.jpg", "meniu-pagina-02.jpg", "meniu-pagina-03.jpg", "meniu-pagina-04.jpg", "meniu-pagina-05.jpg", "meniu-pagina-06.jpg", "meniu-pagina-07.jpg", "meniu-pagina-08.jpg", "meniu-pagina-09.jpg", "meniu-pagina-10.jpg", "meniu-pagina-11.jpg", "meniu-pagina-12.jpg", "meniu-pagina-13.jpg"];
+const IM=["pagina-00.jpg", "pagina-01.jpg", "pagina-02.jpg", "pagina-03.jpg", "pagina-04.jpg", "pagina-05.jpg", "pagina-06.jpg", "pagina-07.jpg", "pagina-08.jpg", "pagina-09.jpg", "pagina-10.jpg", "pagina-11.jpg", "pagina-12.jpg", "pagina-13.jpg"];
+const DIR="giovanni%20meniu/",PRE=["","meniu-"];
 const AL=["Coperta meniului Giovanni’s", "Cuprins meniu și listă alergeni", "Aperitive", "Fel principal: supe și risotto", "Paste", "Fel principal: pește și fructe de mare", "Fel principal: platouri de fructe de mare Adriatico și biban la grătar", "Fel principal: carne", "Fel principal: burgeri și coaste de porc", "Garnituri", "Salate", "Pizza", "Pizza și pizze dolci", "Deserturi (Dolci)"];
 const HS=[[2, "Aperitive", 51.6, 1.9, 14.4, 16.4], [5, "Pește și fructe de mare", 66.9, 1.9, 15, 16.4], [4, "Paste", 82.8, 1.9, 15.2, 16.4], [7, "Carne", 51.6, 19.5, 14.4, 16], [9, "Garnituri", 66.9, 19.5, 15, 16], [10, "Salate", 82.8, 19.5, 15.2, 16], [13, "Deserturi", 51.4, 36, 15.2, 13.9], [11, "Pizza", 67.6, 36, 30.3, 13.9]];
 const $=s=>document.querySelector(s),L=$('#L'),R=$('#R'),N=IM.length,mq=matchMedia('(max-width:800px)');
@@ -43,9 +44,10 @@ let cur=0;
 function fill(el,i){const ok=i>=0&&i<N;
  if(!ok){el.innerHTML='';el.classList.add('e');return}
  el.classList.remove('e');
- let h='<img src="'+IM[i]+'" alt="'+AL[i]+'" draggable="false">';
+ let h='<img src="'+DIR+PRE[0]+IM[i]+'" data-i="'+i+'" alt="'+AL[i]+'" draggable="false">';
  if(i===1)h+=HS.map(([p,t,x,y,w,hh])=>'<button class="hs" data-go="'+p+'" aria-label="'+t+'" style="left:'+x+'%;top:'+y+'%;width:'+w+'%;height:'+hh+'%"></button>').join('');
- el.innerHTML=h}
+ el.innerHTML=h;
+ el.querySelectorAll('img').forEach(im=>{let k=0;im.onerror=()=>{k++;if(k<PRE.length)im.src=DIR+PRE[k]+IM[+im.dataset.i]}})}
 function anim(el,c){el.classList.remove('nx','pv');void el.offsetWidth;el.classList.add(c)}
 function show(dir){
  const m=mq.matches;let l=-1,r=cur;
