@@ -29,4 +29,41 @@ button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.pg{animation:none!important}}
 </style></head><body>
 <a class="back" href="index.html"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M5 1L1 5L5 9M1 5H13" stroke="#d9b863" stroke-width="1.3"/></svg>Înapoi la Giovanni's</a>
-<div class="book"
+<div class="book" id="book"><section class="pg" id="L" aria-label="Pagina din stânga"></section><section class="pg" id="R" aria-label="Pagina din dreapta"></section></div>
+<nav class="bar" aria-label="Navigare meniu">
+<button id="pv" aria-label="Pagina anterioară">&#8249; Înapoi</button><span id="cnt" aria-live="polite"></span>
+<button data-go="1" aria-label="Mergi la cuprins">Cuprins</button><button id="nx" aria-label="Pagina următoare">Înainte &#8250;</button>
+</nav>
+<script>
+const IM=["meniu-pagina-00.jpg", "meniu-pagina-01.jpg", "meniu-pagina-02.jpg", "meniu-pagina-03.jpg", "meniu-pagina-04.jpg", "meniu-pagina-05.jpg", "meniu-pagina-06.jpg", "meniu-pagina-07.jpg", "meniu-pagina-08.jpg", "meniu-pagina-09.jpg", "meniu-pagina-10.jpg", "meniu-pagina-11.jpg", "meniu-pagina-12.jpg", "meniu-pagina-13.jpg"];
+const AL=["Coperta meniului Giovanni’s", "Cuprins meniu și listă alergeni", "Aperitive", "Fel principal: supe și risotto", "Paste", "Fel principal: pește și fructe de mare", "Fel principal: platouri de fructe de mare Adriatico și biban la grătar", "Fel principal: carne", "Fel principal: burgeri și coaste de porc", "Garnituri", "Salate", "Pizza", "Pizza și pizze dolci", "Deserturi (Dolci)"];
+const HS=[[2, "Aperitive", 51.6, 1.9, 14.4, 16.4], [5, "Pește și fructe de mare", 66.9, 1.9, 15, 16.4], [4, "Paste", 82.8, 1.9, 15.2, 16.4], [7, "Carne", 51.6, 19.5, 14.4, 16], [9, "Garnituri", 66.9, 19.5, 15, 16], [10, "Salate", 82.8, 19.5, 15.2, 16], [13, "Deserturi", 51.4, 36, 15.2, 13.9], [11, "Pizza", 67.6, 36, 30.3, 13.9]];
+const $=s=>document.querySelector(s),L=$('#L'),R=$('#R'),N=IM.length,mq=matchMedia('(max-width:800px)');
+let cur=0;
+function fill(el,i){const ok=i>=0&&i<N;
+ if(!ok){el.innerHTML='';el.classList.add('e');return}
+ el.classList.remove('e');
+ let h='<img src="'+IM[i]+'" alt="'+AL[i]+'" draggable="false">';
+ if(i===1)h+=HS.map(([p,t,x,y,w,hh])=>'<button class="hs" data-go="'+p+'" aria-label="'+t+'" style="left:'+x+'%;top:'+y+'%;width:'+w+'%;height:'+hh+'%"></button>').join('');
+ el.innerHTML=h}
+function anim(el,c){el.classList.remove('nx','pv');void el.offsetWidth;el.classList.add(c)}
+function show(dir){
+ const m=mq.matches;let l=-1,r=cur;
+ if(m){fill(R,cur)}else{const s=Math.floor(cur/2);cur=2*s;l=2*s;r=2*s+1;fill(L,l);fill(R,r)}
+ if(dir)anim(m||dir>0?R:L,dir>0?'nx':'pv');
+ $('#pv').disabled=cur<=0;$('#nx').disabled=cur>=(m?N-1:N-2);
+ $('#cnt').textContent=(l<0?(r+1):r>=N?(l+1):(l+1)+'–'+(r+1))+' / '+N}
+function go(p){const o=cur;cur=Math.max(0,Math.min(N-1,p));show(cur>o?1:cur<o?-1:0)}
+function step(d){go(cur+d*(mq.matches?1:2))}
+$('#pv').onclick=()=>step(-1);$('#nx').onclick=()=>step(1);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(+b.dataset.go)});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+let tx=null;const bk=$('#book');
+bk.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+bk.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>60)step(d<0?1:-1)});
+mq.addEventListener('change',()=>show(0));
+const AN={alergeni:1,aperitive:2,'fel-principal':3,paste:4,peste:5,carne:7,garnituri:9,salate:10,desert:13,pizza:11};
+function hash(){const h=decodeURIComponent(location.hash.slice(1));if(h in AN)go(AN[h])}
+addEventListener('hashchange',hash);
+show(0);hash();
+</script></body></html>
